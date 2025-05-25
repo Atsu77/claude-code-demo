@@ -7,13 +7,19 @@ def multiply(a, b):
     """二つの数値を掛け算する関数"""
     return a * b
 
+def subtract(a, b):
+    """二つの数値を引き算する関数"""
+    return a - b
+
 def main():
     """メイン関数"""
     print("簡単な計算機です")
     result1 = add(5, 3)
     result2 = multiply(4, 6)
+    result3 = subtract(10, 3)
     print(f"5 + 3 = {result1}")
     print(f"4 × 6 = {result2}")
+    print(f"10 - 3 = {result3}")
 
 if __name__ == "__main__":
     main()
