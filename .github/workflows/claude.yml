@@ -26,7 +26,7 @@ jobs:
     steps:
       # Claudeを呼び出す処理
       - name: Run Claude Code
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}  # APIキーを安全に参照
           github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHubアクセス用トークン
