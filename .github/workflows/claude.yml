@@ -24,9 +24,15 @@ jobs:
       pull-requests: write # プルリクエストへの書き込み権限
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # 完全な履歴を取得（ブランチ操作に必要）
+
       # Claudeを呼び出す処理
       - name: Run Claude Code
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}  # APIキーを安全に参照
           github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHubアクセス用トークン
