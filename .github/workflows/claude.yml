@@ -1,0 +1,32 @@
+name: Claude Code Assistant
+
+# このワークフローがいつ動作するかを定義
+on:
+  issues:
+    types: [opened, edited]  # 課題が作成・編集された時
+  issue_comment:
+    types: [created]  # 課題にコメントが追加された時
+  pull_request:
+    types: [opened, edited]  # プルリクエストが作成・編集された時
+  pull_request_review_comment:
+    types: [created]  # プルリクエストにレビューコメントが追加された時
+
+jobs:
+  claude_assistant:
+    # Claudeメンションが含まれている場合のみ実行
+    if: contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude') || contains(github.event.pull_request.body, '@claude')
+
+    runs-on: ubuntu-latest  # Ubuntu環境で実行
+
+    permissions:
+      contents: write      # ファイルの読み書き権限
+      issues: write        # 課題への書き込み権限
+      pull-requests: write # プルリクエストへの書き込み権限
+
+    steps:
+      # Claudeを呼び出す処理
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}  # APIキーを安全に参照
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHubアクセス用トークン
